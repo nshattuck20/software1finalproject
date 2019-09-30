@@ -22,6 +22,16 @@ public class Product {
         Product.associatedParts = associatedParts;
     }
 
+    public void setAllVariables(int ID, String name, double price, int inStock, int min, int max){
+       this.setProductName(name);
+       this.setProductID(ID);
+       this.setProductInStock(inStock);
+       this.setProductPrice(price);
+       this.setProductMin(min);
+       this.setProductMax(max);
+       //Add all associated parts to list
+       associatedParts.addAll();
+    }
 
 
     //// Constructor
@@ -33,6 +43,7 @@ public class Product {
         min = new SimpleIntegerProperty();
         max = new SimpleIntegerProperty();
     }
+
 
 
     //// Getters
@@ -111,6 +122,7 @@ public class Product {
     public void setProductMax(int max) {
         this.max.set(max);
     }
+
 
 
 

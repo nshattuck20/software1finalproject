@@ -1,6 +1,7 @@
 package View_Controller;
 
 import Model.InHouse;
+import Model.Outsourced;
 import Model.Part;
 import Model.Product;
 import javafx.collections.FXCollections;
@@ -152,8 +153,8 @@ public class MainScreenController implements Initializable {
         productInvColumn.setCellValueFactory(cellData -> cellData.getValue().productInvProperty().asObject());
 
         //load some dummy data
-        partsTable.setItems(updatePartsTable());
-        //productTable.setItems(updateProductsTable());
+        partsTable.setItems(updateTableData());
+        productTable.setItems(updateProductsTable());
 
 //        updateProductsTableView();
     }
@@ -162,21 +163,30 @@ public class MainScreenController implements Initializable {
     This method loads some test data
     to the products table.
      */
-    public ObservableList<Part> updatePartsTable(){
+    public ObservableList<Part> updateTableData() {
         InHouse part1 = new InHouse(1, "Part 1", 1.99, 10, 1, 20, 0);
         InHouse part2 = new InHouse(1, "Part 2", 4.99, 5, 1, 20, 0);
-        InHouse part3 = new InHouse(1, "Part 3", 3.99, 8, 1, 20, 0);
+        Outsourced os1 = new Outsourced(1, "Outsourced 3", 3.99, 8, 1, 20, 1);
+        Product computer = new Product();
+        computer.setAllVariables(1, "Computer", 299.99, 20, 1, 3);
+
         ObservableList<Part> parts = FXCollections.observableArrayList();
+
         parts.add(part1);
         parts.add(part2);
-        parts.add(part3);
+        parts.add(os1);
         return parts;
 
     }
 
-//    public ObservableList<Product> updateProductsTable() {
-//        ObservableList<Product> product = FXCollections.observableArrayList();
-//        product.add(product1);
-//        return product;
-//    }
+    /*
+    Load some dummy data to make sure the product table populates correctly.
+     */
+    public ObservableList<Product> updateProductsTable() {
+        ObservableList<Product> products = FXCollections.observableArrayList();
+        Product gameConsole = new Product();
+        gameConsole.setAllVariables(1, "Nintendo Switch", 299.99, 20, 1, 3);
+        products.add(gameConsole);
+        return products;
+    }
 }

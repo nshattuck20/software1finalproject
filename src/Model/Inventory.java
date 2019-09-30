@@ -7,12 +7,18 @@ public class Inventory {
 
     private static ObservableList<Product> productInventory = FXCollections.observableArrayList();
     private static ObservableList<Part> partInventory = FXCollections.observableArrayList();
-    private static int partIDCount = 0;
-    private static int productIDCount = 0;
+//    private static int partIDCount = 0;
+//    private static int productIDCount = 0;
+
+
 
     public static ObservableList<Product> getProductInventory() {
         return productInventory;
     }
+
+//    public void setAssociatedParts(ObservableList<Part> P){
+//        productInventory.addAll((Product) P);
+//    }
 
     public static void setProductInventory(ObservableList<Product> productInventory) {
         Inventory.productInventory = productInventory;
@@ -26,19 +32,21 @@ public class Inventory {
         Inventory.partInventory = partInventory;
     }
 
-    public static int getPartIDCount() {
-        return partIDCount;
-    }
 
-    public static void setPartIDCount(int partIDCount) {
-        Inventory.partIDCount = partIDCount;
-    }
 
-    public static int getProductIDCount() {
-        return productIDCount;
-    }
+//    public static int getPartIDCount() {
+//        return partIDCount;
+//    }
+//
+//    public static void setPartIDCount(int partIDCount) {
+//        Inventory.partIDCount = partIDCount;
+//    }
 
-    public static void setProductIDCount(int productIDCount) {
-        Inventory.productIDCount = productIDCount;
-    }
+//    public static int getProductIDCount() {
+//        return productIDCount;
+//    }
+//
+//    public static void setProductIDCount(int productIDCount) {
+//        Inventory.productIDCount = productIDCount;
+//    }
 }
