@@ -10,7 +10,10 @@ public class Inventory {
 //    private static int partIDCount = 0;
 //    private static int productIDCount = 0;
 
+    //Default constructor
+    public Inventory(){
 
+    }
 
     public static ObservableList<Product> getProductInventory() {
         return productInventory;

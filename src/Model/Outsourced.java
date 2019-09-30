@@ -10,7 +10,7 @@ public class Outsourced extends Part {
 
 
     public Outsourced(int partID, String partName, double partPrice, int numOfPartsInStock, int min, int max, int machineID) {
-        super(partID, partName, partPrice, numOfPartsInStock, min, max);
+        super();
         this.companyName = new SimpleStringProperty();
     }
 }

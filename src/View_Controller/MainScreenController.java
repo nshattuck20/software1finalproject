@@ -1,9 +1,6 @@
 package View_Controller;
 
-import Model.InHouse;
-import Model.Outsourced;
-import Model.Part;
-import Model.Product;
+import Model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -84,23 +82,31 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private MenuBar menuBar;
-    private static Part modifyPart;
+    private Part modifyPart;
 
     /*
-    This method will allow the user to double click a cell and
+    This method will allow the user to  click a cell and
     update the name, id, price, and inventory level of the selected
     part.
      */
 
-    public void openModifyPartScreen(TableColumn.CellEditEvent editedCell) throws IOException {
+    public void changePartNameCellEvent(TableColumn.CellEditEvent editedCell){
         modifyPart = partsTable.getSelectionModel().getSelectedItem();
-        Parent modifyPartScreenParent = FXMLLoader.load(getClass().getResource("ModifyPart.fxml"));
-        Scene modifyPartScreen = new Scene(modifyPartScreenParent);
-        Stage modifyPartStage = (Stage) ((Node) editedCell.getSource()).getScene().getWindow();
-        modifyPartStage.setScene(modifyPartScreen);
-        modifyPartStage.show();
-
+        modifyPart.setPartName(editedCell.getNewValue().toString());
     }
+
+
+//    @FXML
+//    public void openModifyPartScreen(ActionEvent event) throws IOException {
+////        modifyPart = partsTable.getSelectionModel().getSelectedItem();
+////        modifyPart.setPartName(editedCell.getNewValue().toString());
+//        Parent modifyPartScreenParent = FXMLLoader.load(getClass().getResource("ModifyPart.fxml"));
+//        Scene modifyPartScreen = new Scene(modifyPartScreenParent);
+//        Stage modifyPartStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//        modifyPartStage.setScene(modifyPartScreen);
+//        modifyPartStage.show();
+//
+//    }
 
     @FXML
     void openAddPartScreen(ActionEvent event) throws IOException {
@@ -113,29 +119,29 @@ public class MainScreenController implements Initializable {
 
     @FXML
     void openAddProductScreen(ActionEvent event) throws IOException {
-        Parent addPartParent = FXMLLoader.load(getClass().getResource("AddProduct.fxml"));
-        Scene addPartScene = new Scene(addPartParent);
+        Parent addProductParent = FXMLLoader.load(getClass().getResource("AddProduct.fxml"));
+        Scene addProductScene = new Scene(addProductParent);
         Stage addPartStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        addPartStage.setScene(addPartScene);
+        addPartStage.setScene(addProductScene);
         addPartStage.show();
     }
 
     @FXML
     void openModifyProductScreen(ActionEvent event) throws IOException {
-        Parent addPartParent = FXMLLoader.load(getClass().getResource("ModifyProduct.fxml"));
-        Scene addPartScene = new Scene(addPartParent);
-        Stage addPartStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        addPartStage.setScene(addPartScene);
-        addPartStage.show();
+        Parent modifyProductParent = FXMLLoader.load(getClass().getResource("ModifyProduct.fxml"));
+        Scene modifyProductScene = new Scene(modifyProductParent);
+        Stage modifyProductStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        modifyProductStage.setScene(modifyProductScene);
+        modifyProductStage.show();
     }
-
+    //User clicks on modify buttons
     @FXML
     void openModifyPartScreen(ActionEvent event) throws IOException {
-        Parent addPartParent = FXMLLoader.load(getClass().getResource("ModifyPart.fxml"));
-        Scene addPartScene = new Scene(addPartParent);
-        Stage addPartStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        addPartStage.setScene(addPartScene);
-        addPartStage.show();
+        Parent modifyPartParent = FXMLLoader.load(getClass().getResource("ModifyPart.fxml"));
+        Scene modifyPartScene = new Scene(modifyPartParent);
+        Stage modifyPartStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        modifyPartStage.setScene(modifyPartScene);
+        modifyPartStage.show();
     }
 
 
@@ -164,14 +170,14 @@ public class MainScreenController implements Initializable {
     to the products table.
      */
     public ObservableList<Part> updateTableData() {
+        ObservableList<Part> parts = FXCollections.observableArrayList();
         InHouse part1 = new InHouse(1, "Part 1", 1.99, 10, 1, 20, 0);
         InHouse part2 = new InHouse(1, "Part 2", 4.99, 5, 1, 20, 0);
         Outsourced os1 = new Outsourced(1, "Outsourced 3", 3.99, 8, 1, 20, 1);
         Product computer = new Product();
         computer.setAllVariables(1, "Computer", 299.99, 20, 1, 3);
-
-        ObservableList<Part> parts = FXCollections.observableArrayList();
-
+        //Inventory.setProductInventory(part1,part2);
+        //Add the inhouse and outsourced parts to our list.
         parts.add(part1);
         parts.add(part2);
         parts.add(os1);

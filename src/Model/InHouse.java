@@ -5,12 +5,21 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public class InHouse extends Part {
 
-    private final IntegerProperty machineID;
+    private  IntegerProperty machineID;
+
+    /*
+    Default Constructor
+     */
+//    public InHouse(){
+//
+//    }
 
     public InHouse(int partID,  String partName, double partPrice, int numOfPartsInStock, int min, int max, int machineID) {
-        super(partID, partName, partPrice, numOfPartsInStock, min, max);
-        this.machineID = new SimpleIntegerProperty(machineID);
+        super();
+        this.machineID = new SimpleIntegerProperty();
     }
+
+
 
     public int getMachineID() {
         return machineID.get();

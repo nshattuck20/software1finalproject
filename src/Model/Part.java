@@ -11,6 +11,16 @@ public abstract class Part {
     private  IntegerProperty min;
     private  IntegerProperty max;
 
+    public Part() {
+         partID = new SimpleIntegerProperty();
+         partName = new SimpleStringProperty();
+         price = new SimpleDoubleProperty();
+         partInv =new SimpleIntegerProperty();
+         min = new SimpleIntegerProperty();
+         max = new SimpleIntegerProperty();
+//         machineID = new SimpleIntegerProperty(0);
+    }
+
     public int getPartID() {
         return partID.get();
     }
@@ -19,12 +29,13 @@ public abstract class Part {
         return partID;
     }
 
+
     public void setPartID(int partID) {
         this.partID.set(partID);
     }
 
     public String getPartName() {
-        return partName.get();
+        return this.partName.get();
     }
 
     public StringProperty partNameProperty() {
@@ -36,13 +47,13 @@ public abstract class Part {
     }
 
     public double getPrice() {
-        return price.get();
+        return this.price.get();
     }
 
     public DoubleProperty priceProperty() {
         return price;
     }
-
+//Added a simple Double wrapper so price can be edited
     public void setPrice(double price) {
         this.price.set(price);
     }
@@ -66,7 +77,9 @@ public abstract class Part {
     public IntegerProperty minProperty() {
         return min;
     }
-
+/*Added simple integer wrapper to enable editing
+when user clicks modify button.
+ */
     public void setMin(int min) {
         this.min.set(min);
     }
@@ -78,25 +91,23 @@ public abstract class Part {
     public IntegerProperty maxProperty() {
         return max;
     }
-
+    /*Added simple integer wrapper to enable editing
+    when user clicks modify button.
+     */
     public void setMax(int max) {
         this.max.set(max);
     }
 
-// Default Constructor
-    public Part(){
-
-    }
 
     //// Constructor
-    public Part(int partId, String partName, double price, int inStock, int min, int max) {
-        this.partID = new SimpleIntegerProperty(partId);
-        this.partName = new SimpleStringProperty(partName);
-        this.price = new SimpleDoubleProperty(price);
-        this.partInv = new SimpleIntegerProperty(inStock);
-        this.min = new SimpleIntegerProperty(min);
-        this.max = new SimpleIntegerProperty(max);
-    }
+//    public Part(int partId, String partName, double price, int inStock, int min, int max) {
+//        this.partID = new SimpleIntegerProperty(partId);
+//        this.partName = new SimpleStringProperty(partName);
+//        this.price = new SimpleDoubleProperty(price);
+//        this.partInv = new SimpleIntegerProperty(inStock);
+//        this.min = new SimpleIntegerProperty(min);
+//        this.max = new SimpleIntegerProperty(max);
+//    }
 
 
 
