@@ -7,14 +7,9 @@ public class InHouse extends Part {
 
     private  IntegerProperty machineID;
 
-    /*
-    Default Constructor
-     */
-//    public InHouse(){
-//
-//    }
 
-    public InHouse(int partID,  String partName, double partPrice, int numOfPartsInStock, int min, int max, int machineID) {
+
+    public InHouse() {
         super();
         this.machineID = new SimpleIntegerProperty();
     }

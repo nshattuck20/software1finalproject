@@ -51,7 +51,7 @@ public class ModifyPartScreenController {
     private TextField companyName;
 
     @FXML
-    private TextField dynamicAddTxt;
+    private TextField dynamicAddFieldTxt;
 
     @FXML
     private Label dynamicAddLabel;

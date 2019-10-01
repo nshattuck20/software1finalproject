@@ -8,8 +8,19 @@ public class Outsourced extends Part {
     private  SimpleStringProperty companyName;
 
 
+    public String getCompanyName() {
+        return companyName.get();
+    }
 
-    public Outsourced(int partID, String partName, double partPrice, int numOfPartsInStock, int min, int max, int machineID) {
+    public SimpleStringProperty companyNameProperty() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName.set(companyName);
+    }
+
+    public Outsourced() {
         super();
         this.companyName = new SimpleStringProperty();
     }

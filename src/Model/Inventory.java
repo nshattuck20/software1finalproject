@@ -35,6 +35,10 @@ public class Inventory {
         Inventory.partInventory = partInventory;
     }
 
+    public static void addPart(Part part){
+       partInventory.add(part);
+    }
+
 
 
 //    public static int getPartIDCount() {
