@@ -11,7 +11,7 @@ public class Inventory {
 //    private static int productIDCount = 0;
 
     //Default constructor
-    public Inventory(){
+    public Inventory() {
 
     }
 
@@ -27,7 +27,7 @@ public class Inventory {
         Inventory.productInventory = productInventory;
     }
 
-    public static ObservableList<Part> getPartInventory() {
+    public static ObservableList<Part> getPartInventory(ObservableList<Part> parts) {
         return partInventory;
     }
 
@@ -35,25 +35,16 @@ public class Inventory {
         Inventory.partInventory = partInventory;
     }
 
-    public static void addPart(Part part){
-       partInventory.add(part);
+    public static void addPart(Part part) {
+        partInventory.add(part);
+//********USE FOR DEBUGGING PURPOSES*****
+//            partInventory.add(part);
+//            System.out.println(partInventory.size());
+//            for(int i = 0; i < partInventory.size(); i++){
+//                Part Temp = partInventory.get(i);
+//                Temp.toString();
+//            }
     }
 
 
-
-//    public static int getPartIDCount() {
-//        return partIDCount;
-//    }
-//
-//    public static void setPartIDCount(int partIDCount) {
-//        Inventory.partIDCount = partIDCount;
-//    }
-
-//    public static int getProductIDCount() {
-//        return productIDCount;
-//    }
-//
-//    public static void setProductIDCount(int productIDCount) {
-//        Inventory.productIDCount = productIDCount;
-//    }
 }

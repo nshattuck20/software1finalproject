@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public class InHouse extends Part {
 
-    private  IntegerProperty machineID;
+    private final IntegerProperty machineID;
 
 
 
@@ -17,7 +17,7 @@ public class InHouse extends Part {
 
 
     public int getMachineID() {
-        return machineID.get();
+        return this.machineID.get();
     }
 
     public IntegerProperty machineIDProperty() {

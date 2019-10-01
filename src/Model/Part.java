@@ -1,6 +1,17 @@
 package Model;
 
+import View_Controller.AddPartScreenController;
 import javafx.beans.property.*;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.Optional;
 
 public abstract class Part {
 
@@ -10,6 +21,7 @@ public abstract class Part {
     private IntegerProperty partInv;
     private IntegerProperty min;
     private IntegerProperty max;
+    private IntegerProperty machineID;
 
     public Part() {
         System.out.println("Calling parent constructor");
@@ -19,7 +31,7 @@ public abstract class Part {
         partInv = new SimpleIntegerProperty();
         min = new SimpleIntegerProperty();
         max = new SimpleIntegerProperty();
-//         machineID = new SimpleIntegerProperty(0);
+        machineID = new SimpleIntegerProperty(0);
     }
 
     public int getPartID() {
@@ -101,12 +113,20 @@ public abstract class Part {
     public void setMax(int max) {
         this.max.set(max);
     }
+/*
+Made for debugging purposes. Part was not showing in tableview
+ */
+//    public String toString(){
+//
+//        return "Returning " + partID.toString();
+//    }
 
 
-    public static String validateNewPart(String name, int min, int max, double price, int inv, String message) {
-        if (name == null) {
-            message = message + "Missing name field!";
+    public static String validateNewPart(String name, int min, int max, double price, int inv, String message) throws IOException {
+        if (name.equals("")) {
+            message = message + "Name field is empty!";
         }
+        // TODO: Handle ID field.
         if (inv < 1) {
             message = message + "The in stock amount cannot be less than 1 ";
         }
@@ -118,7 +138,10 @@ public abstract class Part {
         }
         if (inv < min || inv > max) {
             message = message + "The inventory must be between the Min and Max values. ";
+
         }
+
+        // if(Integer)machineID)
         return message;
     }
 }

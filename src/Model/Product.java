@@ -10,16 +10,16 @@ public class Product {
     private final IntegerProperty inStock;
     private final IntegerProperty min;
     private final IntegerProperty max;
-    private static ObservableList<Part> associatedParts = FXCollections.observableArrayList();
+    private ObservableList<Part> associatedParts = FXCollections.observableArrayList();
     private final IntegerProperty productID;
     private final StringProperty name;
 
-    public static ObservableList<Part> getAssociatedParts() {
+    public ObservableList<Part> getAssociatedParts() {
         return associatedParts;
     }
 
-    public static void setAssociatedParts(ObservableList<Part> associatedParts) {
-        Product.associatedParts = associatedParts;
+    public void setAssociatedParts(ObservableList<Part> associatedParts) {
+        this.associatedParts = associatedParts;
     }
 
     public void setAllVariables(int ID, String name, double price, int inStock, int min, int max){
@@ -122,6 +122,9 @@ public class Product {
     public void setProductMax(int max) {
         this.max.set(max);
     }
+    //TODO:
+    //make a new setter to add associated parts
+    //make getter as well
 
 
 

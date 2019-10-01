@@ -158,38 +158,43 @@ public class MainScreenController implements Initializable {
      */
     public ObservableList<Part> updateTableData() {
         ObservableList<Part> parts = FXCollections.observableArrayList();
-        InHouse part1 = new InHouse();
-        // InHouse part2 = new InHouse();
-        part1.setPartName("Part 1");
-        part1.setPartID(1);
-        part1.setPrice(2.99);
-        part1.setPartInv(10);
-        part1.setMin(1);
-        part1.setMax(10);
+        return Inventory.getPartInventory(parts);
 
-//        part2.setPartName("Part 1");
-//        part2.setPartID(1);
-//        part2.setPrice(2.99);
-//        part2.setPartInv(10);
-//        part2.setMin(1);
-//        part2.setMax(10);
-
-        Outsourced os1 = new Outsourced();
-        os1.setPartName("Part 1");
-        os1.setPartID(1);
-        os1.setPrice(2.99);
-        os1.setPartInv(10);
-        os1.setMin(1);
-        os1.setMax(10);
-        //Add a new product
-        Product computer = new Product();
-        computer.setAllVariables(1, "Computer", 299.99, 20, 1, 3);
-        //Inventory.setProductInventory(part1,part2);
-        //Add the inhouse and outsourced parts to our list.
-        parts.add(part1);
-        //parts.add(part2);
-        parts.add(os1);
-        return parts;
+        /*
+         ***DUMMY DATA BELOW FOR EASY TESTING***
+         */
+//        InHouse part1 = new InHouse();
+//        // InHouse part2 = new InHouse();
+//        part1.setPartName("Part 1");
+//        part1.setPartID(1);
+//        part1.setPrice(2.99);
+//        part1.setPartInv(10);
+//        part1.setMin(1);
+//        part1.setMax(10);
+//
+////        part2.setPartName("Part 1");
+////        part2.setPartID(1);
+////        part2.setPrice(2.99);
+////        part2.setPartInv(10);
+////        part2.setMin(1);
+////        part2.setMax(10);
+//
+//        Outsourced os1 = new Outsourced();
+//        os1.setPartName("Part 1");
+//        os1.setPartID(1);
+//        os1.setPrice(2.99);
+//        os1.setPartInv(10);
+//        os1.setMin(1);
+//        os1.setMax(10);
+//        //Add a new product
+//        Product computer = new Product();
+//        computer.setAllVariables(1, "Computer", 299.99, 20, 1, 3);
+//        //Inventory.setProductInventory(part1,part2);
+//        //Add the inhouse and outsourced parts to our list.
+//        parts.add(part1);
+//        //parts.add(part2);
+//        parts.add(os1);
+//        return parts;
 
     }
 
