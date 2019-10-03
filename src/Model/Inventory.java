@@ -27,12 +27,25 @@ public class Inventory {
         Inventory.productInventory = productInventory;
     }
 
-    public static ObservableList<Part> getPartInventory(ObservableList<Part> parts) {
+    public static ObservableList<Part> getPartInventory() {
         return partInventory;
     }
 
-    public static void setPartInventory(ObservableList<Part> partInventory) {
+    public static ObservableList<Part> setPartInventory(ObservableList<Part> partInventory) {
         Inventory.partInventory = partInventory;
+        return partInventory;
+    }
+
+    public static void addAll(ObservableList<Part> allParts) {
+
+        partInventory.addAll(allParts);
+        System.out.println("Size of addAll is " + partInventory.size());
+
+
+    }
+
+    public static void addAllProducts(ObservableList<Product> allProducts) {
+        productInventory.addAll(allProducts);
     }
 
     public static void addPart(Part part) {

@@ -5,12 +5,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Product {
-
+    private ObservableList<Part> associatedParts = FXCollections.observableArrayList();
     private final DoubleProperty price;
     private final IntegerProperty inStock;
     private final IntegerProperty min;
     private final IntegerProperty max;
-    private ObservableList<Part> associatedParts = FXCollections.observableArrayList();
     private final IntegerProperty productID;
     private final StringProperty name;
 

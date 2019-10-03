@@ -4,8 +4,6 @@ import Model.InHouse;
 import Model.Inventory;
 import Model.Outsourced;
 import Model.Part;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
-import javafx.beans.property.IntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -123,8 +121,9 @@ public class AddPartScreenController implements Initializable {
                     newPart.setMin(Integer.parseInt(newPartMin));
                     newPart.setMax(Integer.parseInt(newPartMax));
                     newPart.setMachineID(Integer.parseInt(newPartMachineID));
-                    Inventory inv = new Inventory();
-                    inv.addPart(newPart);
+                    Inventory.addPart(newPart);
+//                    Inventory inv = new Inventory();
+//                    inv.addPart(newPart);
 
                 } else {
                     if (outSourcedRadioButton.isSelected()) {
@@ -136,8 +135,8 @@ public class AddPartScreenController implements Initializable {
                         newOutsourcedPart.setMin(Integer.parseInt(newPartMin));
                         newOutsourcedPart.setMax(Integer.parseInt(newPartMax));
                         newOutsourcedPart.setCompanyName(companyName);
-                        Inventory inv = new Inventory();
-                        inv.addPart(newOutsourcedPart);
+//                        Inventory inv = new Inventory();
+                        Inventory.addPart(newOutsourcedPart);
                     }
                     //Neither inHouse or Outsourced selected
                     else {

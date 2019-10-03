@@ -14,7 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -84,15 +83,15 @@ public class MainScreenController implements Initializable {
     @FXML
     private MenuBar menuBar;
     private Part modifyPart;
+    private static boolean isAdded;
 
 
-
-     @FXML
-     public void handleExitClicked(ActionEvent event){
-         Stage stage = (Stage) exitButton.getScene().getWindow();
-         Platform.exit();
-         stage.close();
-     }
+    @FXML
+    public void handleExitClicked(ActionEvent event) {
+        Stage stage = (Stage) exitButton.getScene().getWindow();
+        Platform.exit();
+        stage.close();
+    }
 
 
     public void openAddPartScreen(ActionEvent event) throws IOException {
@@ -124,6 +123,7 @@ public class MainScreenController implements Initializable {
     //User clicks on modify buttons
     @FXML
     void openModifyPartScreen(ActionEvent event) throws IOException {
+
         Parent modifyPartParent = FXMLLoader.load(getClass().getResource("ModifyPart.fxml"));
         Scene modifyPartScene = new Scene(modifyPartParent);
         Stage modifyPartStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -135,77 +135,101 @@ public class MainScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //Set the columns for the parts table
+
+        //Lamda expressions
         partIDColumn.setCellValueFactory(cellData -> cellData.getValue().partIDProperty().asObject());
         partNameColumn.setCellValueFactory(cellData -> cellData.getValue().partNameProperty());
         partPriceColumn.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
         partInvColumn.setCellValueFactory(cellData -> cellData.getValue().partInvProperty().asObject());
-        //Set the columns for the products table
+        // Set the columns for the products table
         productIDColumn.setCellValueFactory(cellData -> cellData.getValue().productIDProperty().asObject());
         productNameColumn.setCellValueFactory(cellData -> cellData.getValue().productNameProperty());
         productPriceColumn.setCellValueFactory(cellData -> cellData.getValue().productPriceProperty().asObject());
         productInvColumn.setCellValueFactory(cellData -> cellData.getValue().productInvProperty().asObject());
 
-        //load some dummy data
-        partsTable.setItems(updateTableData());
-        productTable.setItems(updateProductsTable());
-
-//        updateProductsTableView();
-    }
-
-    /*
-    This method loads some test data
-    to the products table.
-     */
-    public ObservableList<Part> updateTableData() {
-        ObservableList<Part> parts = FXCollections.observableArrayList();
-        return Inventory.getPartInventory(parts);
-
         /*
-         ***DUMMY DATA BELOW FOR EASY TESTING***
+        Add some dummy data to enable easier testing.
          */
-//        InHouse part1 = new InHouse();
-//        // InHouse part2 = new InHouse();
-//        part1.setPartName("Part 1");
-//        part1.setPartID(1);
-//        part1.setPrice(2.99);
-//        part1.setPartInv(10);
-//        part1.setMin(1);
-//        part1.setMax(10);
-//
-////        part2.setPartName("Part 1");
-////        part2.setPartID(1);
-////        part2.setPrice(2.99);
-////        part2.setPartInv(10);
-////        part2.setMin(1);
-////        part2.setMax(10);
-//
-//        Outsourced os1 = new Outsourced();
-//        os1.setPartName("Part 1");
-//        os1.setPartID(1);
-//        os1.setPrice(2.99);
-//        os1.setPartInv(10);
-//        os1.setMin(1);
-//        os1.setMax(10);
-//        //Add a new product
-//        Product computer = new Product();
-//        computer.setAllVariables(1, "Computer", 299.99, 20, 1, 3);
-//        //Inventory.setProductInventory(part1,part2);
-//        //Add the inhouse and outsourced parts to our list.
-//        parts.add(part1);
-//        //parts.add(part2);
-//        parts.add(os1);
-//        return parts;
+        if (!isAdded) {
 
+            updateProductsTable(updateDummyPartData());
+            isAdded = true;
+        }
+        partsTable.setItems(Inventory.getPartInventory());
+        //ObservableList temp = Inventory.getProductInventory();
+        productTable.setItems(Inventory.getProductInventory());
+        //productTable.setItems(updateProductsTable());
+        //Enable parts table to be modifiable
+        partsTable.setEditable(true);
+//        partsTable.getSelectionModel().selectedItemProperty().addListener(
+//                (observable, oldValue, newValue) -> updatePartTableData(newValue));
+        // partsTable.set
+
+        // partsTable.setItems(updateDummyPartData(newValue));
+
+
+        // Listen for selection changes and show the person details when changed.
+
+
+    }
+
+
+    /*
+
+     */
+    public ObservableList<Part> addPart(ObservableList<Part> part) {
+        System.out.println("Size of addPart is " + part.size());
+        return Inventory.setPartInventory(part);
+    }
+
+    public ObservableList<Product> updateProductTableData() {
+        ObservableList<Product> products = FXCollections.observableArrayList();
+        Product product = new Product();
+        System.out.println("The size of product list is " + products.size());
+        return Inventory.getProductInventory();
     }
 
     /*
-    Load some dummy data to make sure the product table populates correctly.
-     */
-    public ObservableList<Product> updateProductsTable() {
-        ObservableList<Product> products = FXCollections.observableArrayList();
-        Product gameConsole = new Product();
-        gameConsole.setAllVariables(1, "Nintendo Switch", 299.99, 20, 1, 3);
-        products.add(gameConsole);
-        return products;
+   This method loads some dummy test data to the products table.
+    */
+    public ObservableList<Product> updateProductsTable(ObservableList associatedParts) {
+        ObservableList<Product> productsList = FXCollections.observableArrayList();
+        Product product = new Product();
+        product.setAllVariables(1, "Computer", 299, 20, 1, 5);
+        product.setAssociatedParts(associatedParts);
+        System.out.println("Associated part list is " + associatedParts.toString());
+
+        productsList.add(product);
+        Inventory.addAllProducts(productsList);
+        System.out.println("The size of the product list is " + productsList.size());
+        return productsList;
+
     }
+    //This method returns some default data for easy testing
+
+
+    //This method updates the tableview of parts with some test data.
+    public ObservableList<Part> updateDummyPartData() {
+        ObservableList<Part> dummyParts = FXCollections.observableArrayList();
+        InHouse dummyPart = new InHouse();
+        dummyPart.setPartID(1);
+        dummyPart.setPartName("Hard Drive");
+        dummyPart.setPrice(129.99);
+        dummyPart.setPartInv(10);
+
+        Outsourced dummyPart2 = new Outsourced();
+        dummyPart2.setPartID(2);
+        dummyPart2.setPartName("Power Supply ");
+        dummyPart2.setPrice(29.99);
+        dummyPart2.setPartInv(20);
+        //Add the parts to the observable list
+        dummyParts.add(dummyPart);
+        dummyParts.add(dummyPart2);
+
+
+        Inventory.addAll(dummyParts);
+        updateProductsTable(dummyParts);
+        return dummyParts;
+    }
+
 }

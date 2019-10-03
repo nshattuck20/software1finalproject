@@ -121,6 +121,15 @@ Made for debugging purposes. Part was not showing in tableview
 //        return "Returning " + partID.toString();
 //    }
 
+    public void setAllVariables(int ID, String name, double price, int inStock, int min, int max) {
+        this.setPartName(name);
+        this.setPartID(ID);
+        this.setPartInv(inStock);
+        this.setPrice(price);
+        this.setMin(min);
+        this.setMax(max);
+
+    }
 
     public static String validateNewPart(String name, int min, int max, double price, int inv, String message) throws IOException {
         if (name.equals("")) {
