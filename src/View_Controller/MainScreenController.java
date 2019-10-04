@@ -82,9 +82,48 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private MenuBar menuBar;
-    private Part modifyPart;
+    //Object to encapsulate part table data and return to the selection model
+    private static Part tempPart;
+    //The index position of the current selected object
+    private static int tempPartIndex;
+    //Object to encapsulate product table data and return to the selection model
+    private static Product tempProduct;
     private static boolean isAdded;
 
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        //Set the columns for the parts table
+
+        //Lamda expressions
+        partIDColumn.setCellValueFactory(cellData -> cellData.getValue().partIDProperty().asObject());
+        partNameColumn.setCellValueFactory(cellData -> cellData.getValue().partNameProperty());
+        partPriceColumn.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
+        partInvColumn.setCellValueFactory(cellData -> cellData.getValue().partInvProperty().asObject());
+        // Set the columns for the products table
+        productIDColumn.setCellValueFactory(cellData -> cellData.getValue().productIDProperty().asObject());
+        productNameColumn.setCellValueFactory(cellData -> cellData.getValue().productNameProperty());
+        productPriceColumn.setCellValueFactory(cellData -> cellData.getValue().productPriceProperty().asObject());
+        productInvColumn.setCellValueFactory(cellData -> cellData.getValue().productInvProperty().asObject());
+
+        /*
+        Add some dummy data to enable easier testing.
+         */
+        if (!isAdded) {
+
+            updateProductsTable(updateDummyPartData());
+            isAdded = true;
+        }
+        partsTable.setItems(Inventory.getPartInventory());
+        //ObservableList temp = Inventory.getProductInventory();
+        productTable.setItems(Inventory.getProductInventory());
+
+
+    }
+
+    //This method returns the index of the object in the Selection model
+    public static int getTempPartIndex() {
+        return tempPartIndex;
+    }
 
     @FXML
     public void handleExitClicked(ActionEvent event) {
@@ -120,10 +159,11 @@ public class MainScreenController implements Initializable {
         modifyProductStage.show();
     }
 
-    //User clicks on modify buttons
+    //User clicks on modify button
     @FXML
     void openModifyPartScreen(ActionEvent event) throws IOException {
-
+        tempPart = partsTable.getSelectionModel().getSelectedItem();
+        tempPartIndex = Inventory.getPartInventory().indexOf(tempPart);
         Parent modifyPartParent = FXMLLoader.load(getClass().getResource("ModifyPart.fxml"));
         Scene modifyPartScene = new Scene(modifyPartParent);
         Stage modifyPartStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -132,51 +172,8 @@ public class MainScreenController implements Initializable {
     }
 
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        //Set the columns for the parts table
-
-        //Lamda expressions
-        partIDColumn.setCellValueFactory(cellData -> cellData.getValue().partIDProperty().asObject());
-        partNameColumn.setCellValueFactory(cellData -> cellData.getValue().partNameProperty());
-        partPriceColumn.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
-        partInvColumn.setCellValueFactory(cellData -> cellData.getValue().partInvProperty().asObject());
-        // Set the columns for the products table
-        productIDColumn.setCellValueFactory(cellData -> cellData.getValue().productIDProperty().asObject());
-        productNameColumn.setCellValueFactory(cellData -> cellData.getValue().productNameProperty());
-        productPriceColumn.setCellValueFactory(cellData -> cellData.getValue().productPriceProperty().asObject());
-        productInvColumn.setCellValueFactory(cellData -> cellData.getValue().productInvProperty().asObject());
-
-        /*
-        Add some dummy data to enable easier testing.
-         */
-        if (!isAdded) {
-
-            updateProductsTable(updateDummyPartData());
-            isAdded = true;
-        }
-        partsTable.setItems(Inventory.getPartInventory());
-        //ObservableList temp = Inventory.getProductInventory();
-        productTable.setItems(Inventory.getProductInventory());
-        //productTable.setItems(updateProductsTable());
-        //Enable parts table to be modifiable
-        partsTable.setEditable(true);
-//        partsTable.getSelectionModel().selectedItemProperty().addListener(
-//                (observable, oldValue, newValue) -> updatePartTableData(newValue));
-        // partsTable.set
-
-        // partsTable.setItems(updateDummyPartData(newValue));
 
 
-        // Listen for selection changes and show the person details when changed.
-
-
-    }
-
-
-    /*
-
-     */
     public ObservableList<Part> addPart(ObservableList<Part> part) {
         System.out.println("Size of addPart is " + part.size());
         return Inventory.setPartInventory(part);

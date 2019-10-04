@@ -50,13 +50,16 @@ public class Inventory {
 
     public static void addPart(Part part) {
         partInventory.add(part);
-//********USE FOR DEBUGGING PURPOSES*****
-//            partInventory.add(part);
-//            System.out.println(partInventory.size());
-//            for(int i = 0; i < partInventory.size(); i++){
-//                Part Temp = partInventory.get(i);
-//                Temp.toString();
-//            }
+
+    }
+
+
+    public void upDatePart() {
+
+    }
+
+    public static void modifyPart(int index, Part part) {
+        partInventory.set(index, part);
     }
 
 
