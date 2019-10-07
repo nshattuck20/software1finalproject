@@ -52,10 +52,23 @@ public class Inventory {
         partInventory.add(part);
 
     }
+    /*
+    This method searches through the list of parts and returns the part
+    we are looking for.
+     */
 
+    public static Part searchParts(String lookPart) {
+        for (Part p : partInventory) {
+            if (p.getPartName().contains(lookPart)) return p;
+        }
+        return null;
+    }
 
-    public void upDatePart() {
-
+    public static Product searchProducts(String lookProduct) {
+        for (Product p : productInventory) {
+            if (p.getProductName().contains(lookProduct)) return p;
+        }
+        return null;
     }
 
     public static void modifyPart(int index, Part part) {

@@ -10,12 +10,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainScreenController implements Initializable {
@@ -117,6 +119,69 @@ public class MainScreenController implements Initializable {
         //ObservableList temp = Inventory.getProductInventory();
         productTable.setItems(Inventory.getProductInventory());
 
+        /**
+         * Enables the user to select multiple rows if applicable to user's
+         * scenario.
+         */
+        partsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        productTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+    }
+    /*
+    This method searches the list of parts and returns
+    the part the user is looking for.
+     */
+
+    @FXML
+    private void searching(ActionEvent event) {
+        String x = SearchPartText.getText();
+        partsTable.getSelectionModel().select(Inventory.searchParts(x));
+
+    }
+
+    @FXML
+    private void searchingProducts(ActionEvent event) {
+        String x = productSearchText.getText();
+        productTable.getSelectionModel().select(Inventory.searchProducts(x));
+
+    }
+
+    /**
+     * This method will remove the selected row from the table
+     */
+    public void deletePartButtonPushed(ActionEvent event) throws IOException {
+        ObservableList<Part> selectedRows, parts;
+        parts = partsTable.getItems();
+
+        //Get the rows that were selected
+        selectedRows = partsTable.getSelectionModel().getSelectedItems();
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Delete Part Confirmation");
+        alert.setHeaderText("Delete part(s)?");
+        Optional<ButtonType> confirm = alert.showAndWait();
+        if (confirm.get() == ButtonType.OK) {
+
+            for (Part part : selectedRows) {
+                System.out.println("Deleting part " + part.getPartName());
+                parts.remove(part);
+                System.out.println("Size of parts inventory is " + Inventory.getPartInventory().size());
+
+            }
+            Parent modifyPartParent = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+            Scene modifyPartScene = new Scene(modifyPartParent);
+            Stage modifyProductStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            modifyProductStage.setScene(modifyPartScene);
+            modifyProductStage.show();
+        }
+        //loop through the selected rows and remove part.
+//        for(Part part: selectedRows){
+//            System.out.println("Deleting part " + part.getPartName());
+//            parts.remove(part);
+//            System.out.println("Size of parts inventory is " + Inventory.getPartInventory().size());
+//
+//        }
+
 
     }
 
@@ -159,16 +224,24 @@ public class MainScreenController implements Initializable {
         modifyProductStage.show();
     }
 
-    //User clicks on modify button
+    //User clicks on modify button. Modify passes a part object
+    //modify part view.
     @FXML
     void openModifyPartScreen(ActionEvent event) throws IOException {
         tempPart = partsTable.getSelectionModel().getSelectedItem();
+        //Store the index of the selected part
         tempPartIndex = Inventory.getPartInventory().indexOf(tempPart);
-        Parent modifyPartParent = FXMLLoader.load(getClass().getResource("ModifyPart.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("ModifyPart.fxml"));
+        Parent modifyPartParent = loader.load();
         Scene modifyPartScene = new Scene(modifyPartParent);
         Stage modifyPartStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         modifyPartStage.setScene(modifyPartScene);
         modifyPartStage.show();
+
+        //Access othe controller and call a method
+        ModifyPartScreenController controller = loader.getController();
+        controller.initData(partsTable.getSelectionModel().getSelectedItem());
     }
 
 

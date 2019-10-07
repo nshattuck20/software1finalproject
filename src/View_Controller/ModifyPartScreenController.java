@@ -71,10 +71,44 @@ public class ModifyPartScreenController implements Initializable {
     int tempPartIndex = MainScreenController.getTempPartIndex();
     private int partID;
     private String companyName;
+    /*
+    This is the makery way of doing it with full blown encapsulation!
+     */
+    private Part selectedPart;
 
 
-    //private boolean outSourcedClicked = false;
+    public void initData(Part part) {
 
+        if (part instanceof InHouse) {
+            selectedPart = part;
+            idTextField.setText(Integer.toString(selectedPart.getPartID()));
+            nameTextField.setText(selectedPart.getPartName());
+            priceTextField.setText(Double.toString(selectedPart.getPrice()));
+            invTextField.setText(Integer.toString(selectedPart.getPartInv()));
+            minTextField.setText(Integer.toString(selectedPart.getMin()));
+            maxTextField.setText(Integer.toString(selectedPart.getMax()));
+
+            switchTextField.setText(Integer.toString(((InHouse) Inventory.getPartInventory().get(tempPartIndex)).getMachineID()));
+            switchLabel.setText("Machine ID");
+            inHouseRadioButton.setSelected(true);
+
+
+        } else {
+            if (part instanceof Outsourced) {
+                selectedPart = part;
+                idTextField.setText(Integer.toString(selectedPart.getPartID()));
+                nameTextField.setText(selectedPart.getPartName());
+                priceTextField.setText(Double.toString(selectedPart.getPrice()));
+                invTextField.setText(Integer.toString(selectedPart.getPartInv()));
+                minTextField.setText(Integer.toString(selectedPart.getMin()));
+                maxTextField.setText(Integer.toString(selectedPart.getMax()));
+                //TODO: Company Name text field will not allow me to grab companyName method.
+                // switchTextField.setText(Inventory.getPartInventory().get(tempPartIndex).getCompanyName());
+                switchLabel.setText("Company Name");
+                outsourcedRadioButton.setSelected(true);
+            }
+        }
+    }
 
     @FXML
     public void inHouseRadioButtonPushed(ActionEvent event) {
@@ -212,29 +246,30 @@ public class ModifyPartScreenController implements Initializable {
         modifyToggleGroup = new ToggleGroup();
         this.inHouseRadioButton.setToggleGroup(modifyToggleGroup);
         this.outsourcedRadioButton.setToggleGroup(modifyToggleGroup);
-
-        Part tempPart = Inventory.getPartInventory().get(tempPartIndex);
-        partID = Inventory.getPartInventory().get(tempPartIndex).getPartID();
-        idTextField.setText(String.valueOf(partID));
-        nameTextField.setText(tempPart.getPartName());
-        invTextField.setText(Integer.toString(tempPart.getPartInv()));
-        priceTextField.setText(Double.toString(tempPart.getPrice()));
-        minTextField.setText(Integer.toString(tempPart.getMin()));
-        maxTextField.setText(Integer.toString(tempPart.getMax()));
-
-        if (tempPart instanceof InHouse) {
-            switchTextField.setText(Integer.toString(((InHouse) Inventory.getPartInventory().get(tempPartIndex)).getMachineID()));
-            switchLabel.setText("Machine ID");
-            inHouseRadioButton.setSelected(true);
-
-
-        }
-
-        if (tempPart instanceof Outsourced) {
-            switchTextField.setText(((Outsourced) Inventory.getPartInventory().get(tempPartIndex)).getCompanyName());
-            switchLabel.setText("Company Name");
-            outsourcedRadioButton.setSelected(true);
-        }
+//
+//        Part tempPart = Inventory.getPartInventory().get(tempPartIndex);
+//        partID = Inventory.getPartInventory().get(tempPartIndex).getPartID();
+//        idTextField.setText(String.valueOf(partID));
+//        nameTextField.setText(tempPart.getPartName());
+//        invTextField.setText(Integer.toString(tempPart.getPartInv()));
+//        priceTextField.setText(Double.toString(tempPart.getPrice()));
+//        minTextField.setText(Integer.toString(tempPart.getMin()));
+//        maxTextField.setText(Integer.toString(tempPart.getMax()));
+//
+//        if (tempPart instanceof InHouse) {
+//            switchTextField.setText(Integer.toString(((InHouse) Inventory.getPartInventory().get(tempPartIndex)).getMachineID()));
+//            switchLabel.setText("Machine ID");
+//            inHouseRadioButton.setSelected(true);
+//
+//
+//        }
+//
+//        if (tempPart instanceof Outsourced) {
+//            switchTextField.setText(((Outsourced) Inventory.getPartInventory().get(tempPartIndex)).getCompanyName());
+//            switchLabel.setText("Company Name");
+//            outsourcedRadioButton.setSelected(true);
+//        }
+//    }
     }
 }
 

@@ -22,6 +22,7 @@ public abstract class Part {
     private IntegerProperty min;
     private IntegerProperty max;
     private IntegerProperty machineID;
+    private SimpleStringProperty companyName;
 
     public Part() {
         System.out.println("Calling parent constructor");
@@ -32,6 +33,7 @@ public abstract class Part {
         min = new SimpleIntegerProperty();
         max = new SimpleIntegerProperty();
         machineID = new SimpleIntegerProperty(0);
+        companyName = new SimpleStringProperty();
     }
 
     public int getPartID() {
@@ -113,13 +115,6 @@ public abstract class Part {
     public void setMax(int max) {
         this.max.set(max);
     }
-/*
-Made for debugging purposes. Part was not showing in tableview
- */
-//    public String toString(){
-//
-//        return "Returning " + partID.toString();
-//    }
 
     public void setAllVariables(int ID, String name, double price, int inStock, int min, int max) {
         this.setPartName(name);
@@ -153,4 +148,5 @@ Made for debugging purposes. Part was not showing in tableview
         // if(Integer)machineID)
         return message;
     }
+
 }

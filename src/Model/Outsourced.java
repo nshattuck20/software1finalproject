@@ -9,7 +9,7 @@ public class Outsourced extends Part {
 
 
     public String getCompanyName() {
-        return companyName.get();
+        return this.companyName.get();
     }
 
     public SimpleStringProperty companyNameProperty() {
