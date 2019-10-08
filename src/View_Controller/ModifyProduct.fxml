@@ -26,34 +26,40 @@
                   <Label layoutX="31.0" layoutY="283.0" text="Price" />
                   <Label layoutX="28.0" layoutY="343.0" text="Max" />
                   <Label layoutX="187.0" layoutY="344.0" text="Min" />
-                  <TableView fx:id="productTable" layoutX="366.0" layoutY="110.0" prefHeight="131.0" prefWidth="478.0">
+                   <TableView fx:id="partsTable" layoutX="366.0" layoutY="110.0" prefHeight="131.0" prefWidth="478.0">
                     <columns>
-                      <TableColumn fx:id="partColumn" prefWidth="105.0" text="Part ID" />
-                      <TableColumn fx:id="nameColumn" prefWidth="127.0" text="Name" />
-                        <TableColumn fx:id="invColumn" prefWidth="105.0" text="Inventory" />
-                        <TableColumn fx:id="priceColumn" prefWidth="140.0" text="Price" />
+                        <TableColumn fx:id="addPartIDColumn" prefWidth="105.0" text="Part ID"/>
+                        <TableColumn fx:id="addPartNameColumn" prefWidth="127.0" text="Name"/>
+                        <TableColumn fx:id="addPartInvColumn" prefWidth="105.0" text="Inventory"/>
+                        <TableColumn fx:id="addPartPriceColumn" prefWidth="140.0" text="Price"/>
                     </columns>
                   </TableView>
                   <Button fx:id="searchButton" layoutX="446.0" layoutY="64.0" mnemonicParsing="false" text="Search" />
                   <TextField fx:id="searchProduct" layoutX="524.0" layoutY="68.0" />
                   <Button fx:id="addButton" layoutX="747.0" layoutY="251.0" mnemonicParsing="false" text="Add" />
-                  <TableView fx:id="table2" layoutX="324.0" layoutY="298.0" prefHeight="131.0" prefWidth="573.0">
+                   <TableView fx:id="associatedPartsTable" layoutX="324.0" layoutY="298.0" prefHeight="131.0"
+                              prefWidth="573.0">
                     <columns>
-                      <TableColumn fx:id="partNameColumn" prefWidth="160.0" text="Name" />
-                      <TableColumn fx:id="partIDColumn" prefWidth="111.0" text="Part ID" />
-                        <TableColumn fx:id="partsInventoryColumn" prefWidth="150.0" text="Inventory" />
-                        <TableColumn fx:id="partPriceColumn" prefWidth="117.0" text="Price" />
+                        <TableColumn fx:id="assocPartNameColumn" prefWidth="160.0" text="Name"/>
+                        <TableColumn fx:id="assocPartIDColumn" prefWidth="111.0" text="Part ID"/>
+                        <TableColumn fx:id="assocPartInvColumn" prefWidth="150.0" text="Inventory"/>
+                        <TableColumn fx:id="assocPartPriceColumn" prefWidth="117.0" text="Price"/>
                     </columns>
                   </TableView>
                   <Button fx:id="deleteButton" layoutX="733.0" layoutY="449.0" mnemonicParsing="false"  text="Delete" />
-                  <Button fx:id="cancelButton" layoutX="731.0" layoutY="506.0" mnemonicParsing="false" text="Cancel" />
+                   <Button fx:id="cancelButton" layoutX="731.0" layoutY="506.0" mnemonicParsing="false"
+                           onAction="#handleCancelButtonPressed" text="Cancel"/>
                   <Button fx:id="saveButton" layoutX="659.0" layoutY="506.0" mnemonicParsing="false" text="Save" />
-                  <TextField fx:id="IDTextField" layoutX="71.0" layoutY="122.0" />
-                  <TextField fx:id="nameTextField" layoutX="73.0" layoutY="172.0" />
-                  <TextField fx:id="invTextField" layoutX="54.0" layoutY="228.0" prefHeight="26.0" prefWidth="76.0" />
-                  <TextField fx:id="priceTextField" layoutX="71.0" layoutY="278.0" prefHeight="26.0" prefWidth="76.0" />
-                  <TextField fx:id="maxTextField" layoutX="64.0" layoutY="339.0" prefHeight="26.0" prefWidth="95.0" />
-                  <TextField fx:id="minTextField" layoutX="223.0" layoutY="340.0" prefHeight="26.0" prefWidth="76.0" />
+                   <TextField fx:id="productIDTextField" editable="false" layoutX="71.0" layoutY="122.0"/>
+                   <TextField fx:id="productNameTextField" layoutX="73.0" layoutY="172.0"/>
+                   <TextField fx:id="productInvTextField" layoutX="54.0" layoutY="228.0" prefHeight="26.0"
+                              prefWidth="76.0"/>
+                   <TextField fx:id="productPriceTextField" layoutX="71.0" layoutY="278.0" prefHeight="26.0"
+                              prefWidth="76.0"/>
+                   <TextField fx:id="productMaxTextField" layoutX="64.0" layoutY="339.0" prefHeight="26.0"
+                              prefWidth="95.0"/>
+                   <TextField fx:id="productMinTextField" layoutX="223.0" layoutY="340.0" prefHeight="26.0"
+                              prefWidth="76.0"/>
                </children>
             </AnchorPane>
          </children>

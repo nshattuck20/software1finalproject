@@ -36,6 +36,17 @@ public abstract class Part {
         companyName = new SimpleStringProperty();
     }
 
+    public int getMachineID() {
+        return machineID.get();
+    }
+
+    public IntegerProperty machineIDProperty() {
+        return machineID;
+    }
+
+    public void setMachineID(int machineID) {
+        this.machineID.set(machineID);
+    }
     public int getPartID() {
         return partID.get();
     }

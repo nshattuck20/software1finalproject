@@ -246,30 +246,7 @@ public class ModifyPartScreenController implements Initializable {
         modifyToggleGroup = new ToggleGroup();
         this.inHouseRadioButton.setToggleGroup(modifyToggleGroup);
         this.outsourcedRadioButton.setToggleGroup(modifyToggleGroup);
-//
-//        Part tempPart = Inventory.getPartInventory().get(tempPartIndex);
-//        partID = Inventory.getPartInventory().get(tempPartIndex).getPartID();
-//        idTextField.setText(String.valueOf(partID));
-//        nameTextField.setText(tempPart.getPartName());
-//        invTextField.setText(Integer.toString(tempPart.getPartInv()));
-//        priceTextField.setText(Double.toString(tempPart.getPrice()));
-//        minTextField.setText(Integer.toString(tempPart.getMin()));
-//        maxTextField.setText(Integer.toString(tempPart.getMax()));
-//
-//        if (tempPart instanceof InHouse) {
-//            switchTextField.setText(Integer.toString(((InHouse) Inventory.getPartInventory().get(tempPartIndex)).getMachineID()));
-//            switchLabel.setText("Machine ID");
-//            inHouseRadioButton.setSelected(true);
-//
-//
-//        }
-//
-//        if (tempPart instanceof Outsourced) {
-//            switchTextField.setText(((Outsourced) Inventory.getPartInventory().get(tempPartIndex)).getCompanyName());
-//            switchLabel.setText("Company Name");
-//            outsourcedRadioButton.setSelected(true);
-//        }
-//    }
+
     }
 }
 

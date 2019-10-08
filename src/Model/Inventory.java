@@ -23,9 +23,6 @@ public class Inventory {
 //        productInventory.addAll((Product) P);
 //    }
 
-    public static void setProductInventory(ObservableList<Product> productInventory) {
-        Inventory.productInventory = productInventory;
-    }
 
     public static ObservableList<Part> getPartInventory() {
         return partInventory;
@@ -43,6 +40,7 @@ public class Inventory {
 
 
     }
+
 
     public static void addAllProducts(ObservableList<Product> allProducts) {
         productInventory.addAll(allProducts);

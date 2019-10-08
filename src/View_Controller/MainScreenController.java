@@ -90,7 +90,9 @@ public class MainScreenController implements Initializable {
     private static int tempPartIndex;
     //Object to encapsulate product table data and return to the selection model
     private static Product tempProduct;
+
     private static boolean isAdded;
+    private static int tempProductIndex;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -174,19 +176,18 @@ public class MainScreenController implements Initializable {
             modifyProductStage.setScene(modifyPartScene);
             modifyProductStage.show();
         }
-        //loop through the selected rows and remove part.
-//        for(Part part: selectedRows){
-//            System.out.println("Deleting part " + part.getPartName());
-//            parts.remove(part);
-//            System.out.println("Size of parts inventory is " + Inventory.getPartInventory().size());
-//
-//        }
+
 
 
     }
 
     //This method returns the index of the object in the Selection model
     public static int getTempPartIndex() {
+        return tempPartIndex;
+    }
+
+
+    public static int getTempProductIndex() {
         return tempPartIndex;
     }
 
@@ -217,11 +218,21 @@ public class MainScreenController implements Initializable {
 
     @FXML
     void openModifyProductScreen(ActionEvent event) throws IOException {
-        Parent modifyProductParent = FXMLLoader.load(getClass().getResource("ModifyProduct.fxml"));
+        tempProduct = productTable.getSelectionModel().getSelectedItem();
+        //Store the index of the selected product
+        tempProductIndex = Inventory.getPartInventory().indexOf(tempProduct);
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("ModifyProduct.fxml"));
+        Parent modifyProductParent = loader.load();
         Scene modifyProductScene = new Scene(modifyProductParent);
         Stage modifyProductStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         modifyProductStage.setScene(modifyProductScene);
         modifyProductStage.show();
+
+        //Access other controller and call a method initData
+        ModifyProductScreenController controller = loader.getController();
+        controller.initData(productTable.getSelectionModel().getSelectedItem());
+
     }
 
     //User clicks on modify button. Modify passes a part object
@@ -282,20 +293,35 @@ public class MainScreenController implements Initializable {
     public ObservableList<Part> updateDummyPartData() {
         ObservableList<Part> dummyParts = FXCollections.observableArrayList();
         InHouse dummyPart = new InHouse();
-        dummyPart.setPartID(1);
+        dummyPart.setPartID(102);
         dummyPart.setPartName("Hard Drive");
         dummyPart.setPrice(129.99);
         dummyPart.setPartInv(10);
 
         Outsourced dummyPart2 = new Outsourced();
-        dummyPart2.setPartID(2);
+        dummyPart2.setPartID(201);
         dummyPart2.setPartName("Power Supply ");
         dummyPart2.setPrice(29.99);
         dummyPart2.setPartInv(20);
         //Add the parts to the observable list
+
+
+        InHouse dummyPart3 = new InHouse();
+        dummyPart3.setPartName("Motherboard");
+        dummyPart3.setPartInv(5);
+        dummyPart3.setPrice(159.99);
+        dummyPart3.setPartID(109);
+
+        Outsourced dummyPart4 = new Outsourced();
+        dummyPart4.setPartName("Vulcan 8GB RAM ");
+        dummyPart4.setPartInv(30);
+        dummyPart4.setPrice(59.99);
+        dummyPart4.setPartID(202);
+
         dummyParts.add(dummyPart);
         dummyParts.add(dummyPart2);
-
+        dummyParts.add(dummyPart3);
+        dummyParts.add(dummyPart4);
 
         Inventory.addAll(dummyParts);
         updateProductsTable(dummyParts);
